@@ -14,7 +14,7 @@ public class CifradoPorColumnas implements InterfazCifrar{
 
     @Override
     public InterfazMensaje cifrar(InterfazMensaje mensaje, Integer numeroColumnas) throws MensajeExepcion{
-        Map<Integer, Character> mapMensaje = new HashMap<>(mensaje.toMap());
+        Map<Integer, Character> mapMensaje = mensaje.toMap();
         Map<Integer, Character> salida = new HashMap();
         
         while(mapMensaje.size() % numeroColumnas != 0)
@@ -35,7 +35,7 @@ public class CifradoPorColumnas implements InterfazCifrar{
 
     @Override
     public InterfazMensaje descifrar(InterfazMensaje mensaje, Integer numeroColumnas) throws MensajeExepcion {
-        Map<Integer, Character> mapMensaje = new HashMap<>(mensaje.toMap());
+        Map<Integer, Character> mapMensaje = mensaje.toMap();
         Map<Integer, Character> salida = new HashMap();
         Integer numeroFilas = mapMensaje.size() / numeroColumnas;
         

@@ -24,7 +24,7 @@ public class Test {
         InterfazCifrar cifradoPorColumnas = new CifradoPorColumnas();
         InterfazMensaje mensaje = new Mensaje("losmeridianosyparalelosterrestresformanunprecisosistemadecoordenadas".toUpperCase());
         InterfazMensaje mensajeCifrado = cifradoPorColumnas.cifrar(mensaje, 7);
-        //InterfazMensaje mensajeDescifrado = cifradoPorColumnas.descifrar(mensajeCifrado, 7);
+        InterfazMensaje mensajeDescifrado = cifradoPorColumnas.descifrar(mensajeCifrado, 7);
         
         System.out.println(mensaje.toString());
         System.out.println(mensajeDescifrado.toString());
