@@ -4,6 +4,9 @@ import Mensaje.Mensaje;
 import java.util.Stack;
 import Cifrar.interfaz.InterfazCifrar;
 import Mensaje.Interfaz.InterfazMensaje;
+import java.util.HashMap;
+import java.util.Map;
+import Excepciones.Mensaje.MensajeExepcion;
 /**
  *
  * @author LMD
@@ -11,24 +14,43 @@ import Mensaje.Interfaz.InterfazMensaje;
 public class CifradoPorColumnas implements InterfazCifrar{
 
     @Override
-    public InterfazMensaje cifrar(InterfazMensaje mensaje) {
-        Stack<Character> pilaMensaje = mensaje.getPila();
-        Stack<Character> salida = new Stack<>();
-        cifrar(pilaMensaje, salida, 0);
-        cifrar(pilaMensaje, salida, 1);
-        return new Mensaje(salida);
+    public InterfazMensaje cifrar(InterfazMensaje mensaje, Integer numeroColumnas) throws MensajeExepcion{
+        Map<Integer, Character> mapMensaje = mensaje.toMap();
+        Map<Integer, Character> salida = new HashMap();
+        //cifrar(pilaMensaje, salida, 0);
+        //cifrar(pilaMensaje, salida, 1);
+        
+        while(mapMensaje.size() % numeroColumnas != 0){
+            mapMensaje.put(mapMensaje.size(), 'X');
+        }
+        
+        for (Integer i = 0; i < numeroColumnas; i++)
+            cifrar(mapMensaje, salida, i, numeroColumnas);
+        
+    return new Mensaje(salida);
     }
     
-    private void cifrar(Stack<Character> pilaMensaje, Stack<Character> salida, Integer inicio){
+    private void cifrar(Map<Integer, Character> pilaMensaje, Map<Integer,Character> salida, Integer inicio, Integer numeroColumnas){
         if(pilaMensaje.size() > inicio){
-            salida.push(pilaMensaje.get(inicio));
-            cifrar(pilaMensaje, salida, inicio + 2);
+            salida.put(inicio, pilaMensaje.get(inicio));
+            cifrar(pilaMensaje, salida, inicio + numeroColumnas, numeroColumnas);
         }
     }
 
     @Override
     public InterfazMensaje descifrar(InterfazMensaje mensaje) {
-        return new Mensaje("asdf");
+        Stack<Character> pilaMensaje = mensaje.getPila();
+        Stack<Character> salida = new Stack<>();
+        descifrar(pilaMensaje, salida, 1);
+        return new Mensaje(salida);
+    }
+    
+    private void descifrar(Stack<Character> pilaMensaje, Stack<Character> salida, Integer inicio){
+        if(pilaMensaje.size()/2 > inicio){
+            salida.push(pilaMensaje.get(inicio - 1));
+            salida.push(pilaMensaje.get(inicio + pilaMensaje.size()/2));
+            descifrar(pilaMensaje, salida, inicio + 1);
+        }
     }
     
     /*

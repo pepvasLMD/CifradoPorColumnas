@@ -5,7 +5,10 @@
  */
 package Mensaje;
 
+import Excepciones.Mensaje.MensajeExepcion;
 import Mensaje.Interfaz.InterfazMensaje;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -13,31 +16,35 @@ import java.util.Stack;
  * @author LMD
  */
 public class Mensaje implements InterfazMensaje{
-    private Stack<Character> mensaje;
+    private Map<Integer, Character> mensaje;
     
-    public Mensaje(String mensaje){
-        this.mensaje = new Stack();
-        for (int i = 0; i < mensaje.length(); i++)
-            this.mensaje.push(mensaje.charAt(i));
+    public Mensaje(String textoPlano) throws MensajeExepcion{
+        if(textoPlano == null) throw new MensajeExepcion("El mensaje debe recibir un valor no nulo");
+        mensaje = new HashMap<>();
+        if(textoPlano.isEmpty()) throw new MensajeExepcion("El mensaje debe tener al menos 1 caracter");
+        for (Integer i = 0; i < textoPlano.length(); i++)
+            mensaje.put(i, textoPlano.charAt(i));
     }
     
-    public Mensaje(Stack<Character> mensaje){
+    public Mensaje(Map<Integer, Character> mensaje) throws MensajeExepcion{
+        if(mensaje.isEmpty()) throw new MensajeExepcion("El mensaje debe tener al menos un caracter");
         this.mensaje = mensaje;
     }
     
     @Override
-    public int getLongitud(){
-        return mensaje.size();
-    }
+    public Integer getTamanio(){return mensaje.size();}
+    
     
     @Override
-    public Stack<Character> getPila(){
+    public Map<Integer,Character> toMap(){
         return mensaje;
     }
-    
     @Override
-    public void imprimir(){
-        mensaje.stream().forEach(System.out::print);
+    public String toString(){return mensaje.values().stream().map(val->val.toString()).reduce("",String::concat); }
+    
+    
+    public void mostrar(){
+        mensaje.values().stream().forEach(System.out::print);
         System.out.println();
     }
 }

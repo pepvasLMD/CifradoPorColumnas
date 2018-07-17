@@ -21,9 +21,13 @@ public class Test {
      */
     public static void main(String[] args){
         InterfazCifrar cifradoPorColumnas = new CifradoPorColumnas();
-        InterfazMensaje mensaje = new Mensaje("juventuddivinotesoroyatevasparanovolver");
-        InterfazMensaje mensajeCifrado = cifradoPorColumnas.cifrar(mensaje);
+        InterfazMensaje mensaje = new Mensaje("losmeridianosyparalelosterrestresformanunprecisosistemadecoordenadas".toUpperCase());
+        InterfazMensaje mensajeCifrado = cifradoPorColumnas.cifrar(mensaje, 7);
+        InterfazMensaje mensajeDescifrado = cifradoPorColumnas.descifrar(mensajeCifrado);
         
+        mensaje.imprimir();
         mensajeCifrado.imprimir();
+        System.out.println("LDPOSRRIENOIASTMESCASARTRACTODMNAEENIEOAEOLRSUSMRSRSERFNOADXIYLEOPSDEX");
+        mensajeDescifrado.imprimir();
     }
 }

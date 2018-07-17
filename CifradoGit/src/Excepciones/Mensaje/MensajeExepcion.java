@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Mensaje.Interfaz;
-
-import java.util.Map;
+package Excepciones.Mensaje;
 
 /**
  *
  * @author Cheko-Ivan
  */
-public interface InterfazMensaje {
-    public Integer getTamanio();
-    public String toString();
-    public Map<Integer,Character> toMap();
+public class MensajeExepcion extends Exception{
+    public MensajeExepcion(String mensaje){
+        super(mensaje);
+    }
 }

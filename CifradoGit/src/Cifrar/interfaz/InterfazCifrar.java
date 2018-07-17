@@ -5,12 +5,13 @@
  */
 package Cifrar.interfaz;
 
+import Excepciones.Mensaje.MensajeExepcion;
 import Mensaje.Interfaz.InterfazMensaje;
 /**
  *
  * @author Administrador
  */
 public interface InterfazCifrar{
-    public InterfazMensaje cifrar(InterfazMensaje mensaje);
+    public InterfazMensaje cifrar(InterfazMensaje mensaje, Integer numeroColumnas) throws MensajeExepcion;
     public InterfazMensaje descifrar(InterfazMensaje mensaje);
 }
