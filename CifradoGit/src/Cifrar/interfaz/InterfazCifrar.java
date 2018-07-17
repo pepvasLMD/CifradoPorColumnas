@@ -13,5 +13,5 @@ import Mensaje.Interfaz.InterfazMensaje;
  */
 public interface InterfazCifrar{
     public InterfazMensaje cifrar(InterfazMensaje mensaje, Integer numeroColumnas) throws MensajeExepcion;
-    public InterfazMensaje descifrar(InterfazMensaje mensaje);
+    public InterfazMensaje descifrar(InterfazMensaje mensaje, Integer numeroColumnas) throws MensajeExepcion;
 }

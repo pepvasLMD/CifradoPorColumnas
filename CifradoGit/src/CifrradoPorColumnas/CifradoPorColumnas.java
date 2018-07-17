@@ -15,41 +15,42 @@ public class CifradoPorColumnas implements InterfazCifrar{
 
     @Override
     public InterfazMensaje cifrar(InterfazMensaje mensaje, Integer numeroColumnas) throws MensajeExepcion{
-        Map<Integer, Character> mapMensaje = mensaje.toMap();
+        Map<Integer, Character> mapMensaje = new HashMap<>(mensaje.toMap());
         Map<Integer, Character> salida = new HashMap();
-        //cifrar(pilaMensaje, salida, 0);
-        //cifrar(pilaMensaje, salida, 1);
         
-        while(mapMensaje.size() % numeroColumnas != 0){
+        while(mapMensaje.size() % numeroColumnas != 0)
             mapMensaje.put(mapMensaje.size(), 'X');
-        }
         
         for (Integer i = 0; i < numeroColumnas; i++)
             cifrar(mapMensaje, salida, i, numeroColumnas);
         
-    return new Mensaje(salida);
+        return new Mensaje(salida);
     }
     
     private void cifrar(Map<Integer, Character> pilaMensaje, Map<Integer,Character> salida, Integer inicio, Integer numeroColumnas){
         if(pilaMensaje.size() > inicio){
-            salida.put(inicio, pilaMensaje.get(inicio));
+            salida.put(salida.size(), pilaMensaje.get(inicio));
             cifrar(pilaMensaje, salida, inicio + numeroColumnas, numeroColumnas);
         }
     }
 
     @Override
-    public InterfazMensaje descifrar(InterfazMensaje mensaje) {
-        Stack<Character> pilaMensaje = mensaje.getPila();
-        Stack<Character> salida = new Stack<>();
-        descifrar(pilaMensaje, salida, 1);
+    public InterfazMensaje descifrar(InterfazMensaje mensaje, Integer numeroColumnas) throws MensajeExepcion {
+        Map<Integer, Character> mapMensaje = new HashMap<>(mensaje.toMap());
+        Map<Integer, Character> salida = new HashMap();
+        
+        
+        for (Integer i = 0; i < numeroColumnas; i++)
+            descifrar(mapMensaje, salida, i, numeroColumnas);
+        
         return new Mensaje(salida);
     }
     
-    private void descifrar(Stack<Character> pilaMensaje, Stack<Character> salida, Integer inicio){
+    private void descifrar(Map<Integer, Character> pilaMensaje, Map<Integer, Character> salida, Integer inicio, Integer numerColumnas){
         if(pilaMensaje.size()/2 > inicio){
-            salida.push(pilaMensaje.get(inicio - 1));
-            salida.push(pilaMensaje.get(inicio + pilaMensaje.size()/2));
-            descifrar(pilaMensaje, salida, inicio + 1);
+            //salida.push(pilaMensaje.get(inicio - 1));
+            //salida.push(pilaMensaje.get(inicio + pilaMensaje.size()/2));
+            descifrar(pilaMensaje, salida, inicio + 1, numerColumnas);
         }
     }
     

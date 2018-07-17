@@ -7,6 +7,7 @@ package Main;
 
 import Cifrar.interfaz.InterfazCifrar;
 import CifrradoPorColumnas.CifradoPorColumnas;
+import Excepciones.Mensaje.MensajeExepcion;
 import Mensaje.Interfaz.InterfazMensaje;
 import Mensaje.Mensaje;
 
@@ -19,15 +20,17 @@ public class Test {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args){
+    public static void main(String[] args) throws MensajeExepcion{
         InterfazCifrar cifradoPorColumnas = new CifradoPorColumnas();
         InterfazMensaje mensaje = new Mensaje("losmeridianosyparalelosterrestresformanunprecisosistemadecoordenadas".toUpperCase());
         InterfazMensaje mensajeCifrado = cifradoPorColumnas.cifrar(mensaje, 7);
-        InterfazMensaje mensajeDescifrado = cifradoPorColumnas.descifrar(mensajeCifrado);
+        InterfazMensaje mensajeDescifrado = cifradoPorColumnas.descifrar(mensajeCifrado, 7);
         
-        mensaje.imprimir();
-        mensajeCifrado.imprimir();
+        System.out.println(mensaje.toString());
+        System.out.println(mensajeCifrado.toString());
         System.out.println("LDPOSRRIENOIASTMESCASARTRACTODMNAEENIEOAEOLRSUSMRSRSERFNOADXIYLEOPSDEX");
-        mensajeDescifrado.imprimir();
+        
+        
+        
     }
 }
