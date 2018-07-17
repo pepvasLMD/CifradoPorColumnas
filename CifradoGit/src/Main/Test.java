@@ -27,8 +27,10 @@ public class Test {
         InterfazMensaje mensajeDescifrado = cifradoPorColumnas.descifrar(mensajeCifrado, 7);
         
         System.out.println(mensaje.toString());
+        System.out.println(mensajeDescifrado.toString());
         System.out.println(mensajeCifrado.toString());
         System.out.println("LDPOSRRIENOIASTMESCASARTRACTODMNAEENIEOAEOLRSUSMRSRSERFNOADXIYLEOPSDEX");
+        
         
         
         
